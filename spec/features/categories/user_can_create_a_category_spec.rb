@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "a user can create a new category" do
+describe "user functionality" do
   scenario "a user can create a new category" do
     Category.create(name: "New")
 
@@ -21,6 +21,28 @@ describe "a user can create a new category" do
     fill_in :Name, with: "Next"
     click_on "Update Category"
 
+    expect(page).to have_content("Next")
+  end
+
+  scenario "a user can see a list of available categories" do
+    cat_1 = Category.create(name: "New")
+    cat_2 = Category.create(name: "Next")
+
+    visit categories_path
+
+    expect(page).to have_content("New")
+    expect(page).to have_content("Next")
+  end
+
+    scenario "a user can delete a category" do
+    cat_1 = Category.create(name: "New")
+    cat_2 = Category.create(name: "Next")
+
+    visit category_path(cat_1)
+
+    first(:link, "Delete").click
+
+    expect(page).to_not have_content("New")
     expect(page).to have_content("Next")
   end
 end

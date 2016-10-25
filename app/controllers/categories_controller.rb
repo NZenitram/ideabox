@@ -1,5 +1,9 @@
 class CategoriesController < ApplicationController
 
+  def index
+    @categories = Category.all
+  end
+
   def new
     @category = Category.new
   end
@@ -28,7 +32,12 @@ class CategoriesController < ApplicationController
     else
       render :edit
     end
+  end
 
+  def destroy
+    @category = Category.find(params[:id])
+    @category.delete
+    redirect_to categories_path
   end
 
   private

@@ -1,3 +1,4 @@
 <h1><%= @category.name %></h1>
 
 <%= link_to "Edit Category", edit_category_path %>
+<%= link_to "Delete", category_path(@category), method: :delete %>
