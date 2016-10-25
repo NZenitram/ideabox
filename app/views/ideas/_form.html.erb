@@ -1,0 +1,11 @@
+<%= form_for @idea do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+
+  <%= f.collection_select :category_id, @categories,:id,:name, include_black: true %>
+
+  <%= f.submit %>
+<% end %>

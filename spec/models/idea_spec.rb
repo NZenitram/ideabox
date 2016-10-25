@@ -1,5 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Idea, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Idea do
+  context "valid attributes" do
+    scenario "idea invalid without content" do
+      idea = Idea.new
+
+      expect(idea).to be_invalid
+    end
+  end
 end
