@@ -1,0 +1,8 @@
+<h1> Select a Category to View Ideas</h1>
+
+<% @categories.each do |category| %>
+  <ul><%= link_to category.name, category_path(category) %></ul>
+<% end %>
+
+<%= link_to "Create a New Category", new_category_path %>
+<%= link_to "Contribute an Idea", new_idea_path %>

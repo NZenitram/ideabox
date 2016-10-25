@@ -1,0 +1,4 @@
+<h2><%= @idea.name %> </h2>
+<p><%= @idea.content %></p>
+
+<%= link_to @idea.category.name, category_path(@idea.category) %>
