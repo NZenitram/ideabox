@@ -33,16 +33,4 @@ describe "user functionality" do
     expect(page).to have_content("New")
     expect(page).to have_content("Next")
   end
-
-    scenario "a user can delete a category" do
-    cat_1 = Category.create(name: "Stop")
-    cat_2 = Category.create(name: "Next")
-
-    visit category_path(cat_1)
-
-    click_on "Delete"
-
-    expect(page).to_not have_content("Stop")
-    expect(page).to have_content("Next")
-  end
 end

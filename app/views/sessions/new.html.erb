@@ -1,0 +1,11 @@
+<h2>Please enter your login information</h1>
+
+<%= form_tag :login, :id => 'login_form' do -%>
+  <%= label_tag :username %>
+  <%= text_field_tag :username %>
+
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+
+  <%= submit_tag "Login" %>
+<% end %>
