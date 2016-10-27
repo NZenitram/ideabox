@@ -1,9 +1,14 @@
 <%= link_to "Category Index", categories_path %>
 <h1><%= @category.name %></h1>
 
-<ul><% @ideas.each do |idea|  %>
-  <li><%= link_to idea.name, category_idea_path(@category, idea) %></li>
-<% end %></ul>
+
+  <% if @user == nil %>
+    <p> You can only view your category ideas if you are logged in. </p>
+  <% else %>
+    <ul><% @user.ideas.each do |idea|  %>
+    <li><%= link_to idea.name, category_idea_path(@category, idea) %></li>
+        <% end %>
+  <% end %></ul>
 
 <%= link_to "Edit Category", edit_category_path %>
 <%= link_to "Delete", category_path(@category), method: :delete %>

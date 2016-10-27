@@ -2,6 +2,17 @@
 <p><%= @idea.content %></p>
 <p>Author:  <%= @idea.user.username %> </p>
 
-<%= link_to @idea.category.name, category_path(@idea.category) %>
-<%= link_to "Delete", category_idea_path(@idea.category, @idea), method: :delete %>
-<%= link_to "Edit", edit_category_idea_path(@idea.category, @idea) %>
+  <%= link_to @idea.category.name, category_path(@idea.category) %>
+  <%= link_to "Delete", category_idea_path(@idea.category, @idea), method: :delete %>
+  <%= link_to "Edit", edit_category_idea_path(@idea.category, @idea) %>
+
+<div class="row"><% @idea.images.each do |image| %>
+    <div class="col-md-4"><%= image_tag image.image.url, :width => '75%' %></div>
+  <% end %></div>
+
+  <%= form_for(@image, html: {multipart: true}) do |f| %>
+    <%= f.label  "Attach an Image" %><br/>
+    <%= f.file_field :image %>
+    <%= hidden_field_tag :idea_id, @idea.id%>
+    <%= f.submit %>
+  <% end %>

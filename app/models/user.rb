@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
-  validates :password, presence: true
+  validates :password, presence: true, on: :create
   validates_confirmation_of :password
-  has_many :ideas
+  enum role: [:default, :admin]
+  has_many :ideas, dependent: :destroy
 end

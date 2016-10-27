@@ -14,11 +14,15 @@ class IdeasController < ApplicationController
     else
       render :new
     end
-
-    def show
-      @idea = Idea.find(params[:id])
-    end
   end
+
+  def show
+    @user = User.find(session[:user_id])
+    @idea = Idea.find(params[:id])
+    @image = Image.new
+    @images = Image.all
+  end
+
 
   def destroy
     @idea = Idea.find(params[:id])

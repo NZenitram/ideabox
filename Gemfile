@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'paperclip'
 gem "bower-rails", "~> 0.11.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -36,6 +37,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rb-readline'
   gem 'sprockets-rails'
+
 end
 
 group :development do

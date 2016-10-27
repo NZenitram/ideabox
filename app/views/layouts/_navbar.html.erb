@@ -38,6 +38,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/users/new">Create a New User</a></li>
           <% if logged_in? %>
+            <li><%= link_to "Test", user_path(User.find(session[:user_id])) %></li>
             <li><%= link_to "Logout", logout_path, method: "delete" %></li>
           <% else %>
             <li><%= link_to "Login", login_path, :class => "nav navbar-nav navbar-right" %></li>

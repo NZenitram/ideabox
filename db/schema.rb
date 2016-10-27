@@ -10,19 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026193522) do
+ActiveRecord::Schema.define(version: 20161027165154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "catergories", force: :cascade do |t|
-    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,13 +32,36 @@ ActiveRecord::Schema.define(version: 20161026193522) do
     t.index ["user_id"], name: "index_ideas_on_user_id", using: :btree
   end
 
+  create_table "image_ideas", force: :cascade do |t|
+    t.integer "image_id"
+    t.integer "idea_id"
+    t.index ["idea_id"], name: "index_image_ideas_on_idea_id", using: :btree
+    t.index ["image_id"], name: "index_image_ideas_on_image_id", using: :btree
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_update_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_images_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "email"
+    t.integer  "role",            default: 0
   end
 
   add_foreign_key "ideas", "categories"
   add_foreign_key "ideas", "users"
+  add_foreign_key "image_ideas", "ideas"
+  add_foreign_key "image_ideas", "images"
+  add_foreign_key "images", "users"
 end
