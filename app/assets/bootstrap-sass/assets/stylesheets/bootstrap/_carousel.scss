@@ -4,6 +4,7 @@
 
 
 // Wrapper for the slide container and indicators
+
 .carousel {
   position: relative;
 }
@@ -21,6 +22,7 @@
     // Account for jankitude on images
     > img,
     > a > img {
+
       @include img-responsive;
       line-height: 1;
     }
@@ -265,6 +267,6 @@
 
   // Move up the indicators
   .carousel-indicators {
-    bottom: 20px;
+    bottom: 0px;
   }
 }

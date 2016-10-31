@@ -1,11 +1,16 @@
-<%= form_for [@idea.category, @idea] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<div class="container text-center">
+  <%= form_for [@idea.category, @idea] do |f| %>
 
-  <%= f.label :content %>
-  <%= f.text_area :content %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
 
-  <%= f.collection_select :category_id, @categories,:id,:name, include_black: true %>
+        <%= f.label :content %>
+        <%= f.text_field :content %>
 
-  <%= f.submit %>
-<% end %>
+        <%= f.collection_select :category_id, @categories,:id,:name, include_black: true %>
+      <div>
+        <br>
+        <%= f.submit 'Submit', :class => "btn btn-primary" %>
+      </div>
+  <% end %>
+</div>

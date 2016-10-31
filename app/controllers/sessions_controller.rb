@@ -6,10 +6,17 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(username: params[:username])
-    if @user.authenticate(params[:password])
+    if @user.nil?
+      flash[:success] = "Invalid username or password"
+      redirect_to login_path
+    elsif @user.authenticate(params[:password])
       flash[:success] = "Successfully logged in!"
       session[:user_id] = @user.id
-      redirect_to user_path(@user)
+      if @user.admin?
+        redirect_to admin_categories_path
+      else
+        redirect_to user_path(@user)
+      end
     else
       render :new
     end

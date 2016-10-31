@@ -1,18 +1,40 @@
-<h2><%= @idea.name %> </h2>
-<p><%= @idea.content %></p>
-<p>Author:  <%= @idea.user.username %> </p>
+<div class="jumbotron">
+  <h2><%= @idea.name %> </h2>
+  <p><%= @idea.content %></p>
+  <p>Author:  <%= @idea.user.username %> </p>
+  <%= link_to @idea.category.name, category_path(@idea.category), :class => "btn btn-primary" %>
+  <%= link_to "Delete", category_idea_path(@idea.category, @idea), method: :delete, :class => "btn btn-warning" %>
+  <%= link_to "Edit", edit_category_idea_path(@idea.category, @idea), :class => "btn btn-success" %>
+</div>
 
-  <%= link_to @idea.category.name, category_path(@idea.category) %>
-  <%= link_to "Delete", category_idea_path(@idea.category, @idea), method: :delete %>
-  <%= link_to "Edit", edit_category_idea_path(@idea.category, @idea) %>
+<%= form_for(@image, html: {multipart: true}) do |f| %>
+  <%= f.label  "Attach an Image" %><br/>
+  <%= f.file_field :image %>
+  <%= hidden_field_tag :idea_id, @idea.id%>
+  <%= f.submit %>
+<% end %>
 
-<div class="row"><% @idea.images.each do |image| %>
-    <div class="col-md-4"><%= image_tag image.image.url, :width => '75%' %></div>
-  <% end %></div>
 
-  <%= form_for(@image, html: {multipart: true}) do |f| %>
-    <%= f.label  "Attach an Image" %><br/>
-    <%= f.file_field :image %>
-    <%= hidden_field_tag :idea_id, @idea.id%>
-    <%= f.submit %>
-  <% end %>
+<div id="myCarousel" class="carousel slide" data-ride="carousel", style="width: 650px; height: absolute; margin: 0 auto">
+  <ol class="carousel-indicators">
+    <% @idea.images.each_with_index do |image, index| %>
+      <li data-target="#myCarousel" data-slide-to="<%= index %>" class="<%= index == 0 ? 'active' : '' %>"></li>
+    <% end %>
+  </ol>
+    <div class="carousel-inner" role="listbox">
+        <% @idea.images.each_with_index do |image, index| %>
+          <div class="item <%= index == 0 ? 'active' : '' %>">
+            <%= image_tag image.image.url %>
+          </div>
+        <% end %>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>

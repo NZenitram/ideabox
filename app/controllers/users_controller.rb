@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :confirm_logged_in, only: [:show]
+
   def new
     @user = User.new
   end
@@ -28,7 +30,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+    if @user == current_user
+       @user = User.find(params[:id])
+    else
+      render file: '/public/404'      
+    end
   end
 
   private

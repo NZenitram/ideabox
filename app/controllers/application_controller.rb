@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
   def current_admin?
     current_user && current_user.admin?
   end
+
+  def confirm_logged_in
+    if !logged_in?
+      redirect_to login_path
+    end  
+  end
 end

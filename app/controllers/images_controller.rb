@@ -17,9 +17,12 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    @image = Image.find(params[:image_id])
+    @ideas = Idea.all
+    @image = Image.find(params[:id])
+    idea = @image.ideas.find_by(user_id: session[:user_id])
+    category = @image.ideas.find_by(user_id: session[:user_id]).category_id
     @image.destroy
-    redirect_to category_path(@idea.category)
+    redirect_to category_idea_path(category, idea)
   end
 
   private

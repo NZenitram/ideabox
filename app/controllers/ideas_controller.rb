@@ -1,4 +1,5 @@
 class IdeasController < ApplicationController
+  before_action :confirm_logged_in
 
   def new
     @categories = Category.all
